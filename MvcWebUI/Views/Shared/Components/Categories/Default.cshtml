@@ -1,0 +1,36 @@
+﻿@model List<CategoryModel>
+
+@if (Model != null && Model.Count > 0)
+{
+    <h5>Categories</h5>
+    <hr />
+    <ul class="navbar-nav ul-categories">
+        @if (ViewBag.CategoryId == null)
+        {
+            <li class="active">
+                <a asp-action="Index" asp-controller="ProductsReportAjax">All Categories</a>
+            </li>
+        }
+        else
+        {
+            <li>
+                <a asp-action="Index" asp-controller="ProductsReportAjax">All Categories</a>
+            </li>
+        }
+        @foreach (var category in Model)
+        {
+            @if (ViewBag.CategoryId != null && Convert.ToInt32(ViewBag.CategoryId) == category.Id)
+            {
+                <li class="active">
+                    <a asp-action="Index" asp-controller="ProductsReportAjax" asp-route-categoryId="@category.Id">@category.Name</a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a asp-action="Index" asp-controller="ProductsReportAjax" asp-route-categoryId="@category.Id">@category.Name</a>
+                </li>
+            }
+        }
+    </ul>
+}
